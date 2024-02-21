@@ -145,6 +145,21 @@ class Dobot:
         return self._send_command(msg)
 
     """
+        Sets the status of the gripper
+    """
+    def _stop_gripper(self, enable=False):
+        msg = Message()
+        msg.id = CommunicationProtocolIDs.SET_GET_END_EFFECTOR_GRIPPER
+        msg.ctrl = ControlValues.THREE
+        msg.params = bytearray([])
+        msg.params.extend(bytearray([0x00]))
+        if enable is True:
+            msg.params.extend(bytearray([0x00]))
+        else:
+            msg.params.extend(bytearray([0x00]))
+        return self._send_command(msg)
+
+    """
         Sets the status of the suction cup
     """
     def _set_end_effector_suction_cup(self, enable=False):
